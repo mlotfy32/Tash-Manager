@@ -26,7 +26,8 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: scaffoldBackgroundLight,
-    cardColor: Color(0xFFF1F2F3),
+    cardColor: Color(0xFFF5F3F3),
+    primaryColor: Colors.black
   );
 
   // =========================
@@ -37,6 +38,8 @@ class AppTheme {
     brightness: Brightness.dark,
     hoverColor: Colors.transparent,
     scaffoldBackgroundColor: scaffoldBackgroundDark,
-    cardColor: Color(0xFF0C1327),
+    cardColor: Color(0xFF2A2A2B),
+    primaryColor: Colors.white
+
   );
 }
