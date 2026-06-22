@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:task/core/utiles/bloc_observer.dart';
+import 'package:task/core/utiles/setup_service_locator.dart';
+import 'package:task/core/utiles/shared_pref/prefs_Keys.dart';
+import 'package:task/core/utiles/shared_pref/shared_pref.dart';
+import 'package:task/taska_app.dart';
+
+late bool mode;
+void main() async{
+    WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+    await dotenv.load(fileName: ".env");
+    await SharedPref.init();
+  String supaBaseUrl = dotenv.get('SUPABASE_URL');
+  String supaBaseKey = dotenv.get('SUPABASE_ANONKEY');
+  await Supabase.initialize(url: supaBaseUrl, anonKey: supaBaseKey);
+  setupServiceLocator();
+  mode = SharedPref.instance.getBool(PrefsKeys.isDarkMode) ?? false;
+  Bloc.observer = AppBlocObserver();
+  runApp(const TasksApp());
+}
