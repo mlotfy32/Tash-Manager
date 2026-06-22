@@ -5,7 +5,10 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:task/core/theme/app_theme.dart';
 import 'package:task/core/theme/cubit/cubit/change_theme_cubit.dart';
 import 'package:task/core/utiles/setup_service_locator.dart';
-import 'package:task/features/login/presentation/view/login_view.dart';
+import 'package:task/core/utiles/shared_pref/prefs_Keys.dart';
+import 'package:task/core/utiles/shared_pref/shared_pref.dart';
+import 'package:task/features/auth/login/presentation/view/login_view.dart';
+import 'package:task/features/home/presentation/view/home_view.dart';
 import 'package:task/main.dart';
 
 class TasksApp extends StatefulWidget {
@@ -16,10 +19,11 @@ class TasksApp extends StatefulWidget {
 }
 
 class _TasksAppState extends State<TasksApp> {
-    final cubit = sl<ChangeThemeCubit>();
+  final cubit = sl<ChangeThemeCubit>();
   @override
   Widget build(BuildContext context) {
-   return  ScreenUtilInit(
+    String token = SharedPref.instance.getString(PrefsKeys.userID) ?? '';
+    return ScreenUtilInit(
       designSize: const Size(360, 784),
       minTextAdapt: true,
       splitScreenMode: true,
@@ -40,8 +44,7 @@ class _TasksAppState extends State<TasksApp> {
           },
         );
       },
-      child: LoginView(),
+      child: token.isEmpty ? LoginView() : HomeView(),
     );
-
   }
 }

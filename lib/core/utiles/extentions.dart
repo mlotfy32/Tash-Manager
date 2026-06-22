@@ -20,6 +20,29 @@ extension pray12hFormate on BuildContext {
     }
   }
 }
+extension NavigationExtension on BuildContext {
+  Future<T?> push<T>(Widget page) {
+    return Navigator.push<T>(
+      this,
+      MaterialPageRoute(builder: (_) => page),
+    );
+  }
+
+  void pop() {
+    Navigator.pop(this);
+  }
+
+  Future<T?> pushReplacement<T, TO>(Widget page) {
+    return Navigator.pushReplacement<T, TO>(
+      this,
+      MaterialPageRoute(builder: (_) => page),
+    );
+  }
+
+  void popUntilRoot() {
+    Navigator.popUntil(this, (route) => route.isFirst);
+  }
+}
 extension ExtensionWidget on Widget {
   Widget get center => Align(alignment: Alignment.center, child: this);
 

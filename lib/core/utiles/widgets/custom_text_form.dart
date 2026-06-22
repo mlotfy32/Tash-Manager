@@ -3,9 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:task/core/utiles/app_fonts.dart';
 import 'package:task/core/utiles/cubit/obscure_text_cubit.dart';
-import 'package:task/core/utiles/setup_service_locator.dart';
 
-// ignore: must_be_immutable
 class CustomTextForm extends StatefulWidget {
   CustomTextForm({
     super.key,
@@ -14,7 +12,7 @@ class CustomTextForm extends StatefulWidget {
     required this.validator,
     this.keyboardType,
     this.suffixIcon,
-    this.isPass,
+    this.isPass, this.cubit,
   });
   final TextEditingController controller;
   final String hint;
@@ -22,13 +20,12 @@ class CustomTextForm extends StatefulWidget {
   TextInputType? keyboardType;
   Widget? suffixIcon;
   bool? isPass;
-
+final ObscureTextCubit? cubit;
   @override
   State<CustomTextForm> createState() => _CustomTextFormState();
 }
 
 class _CustomTextFormState extends State<CustomTextForm> {
-  final cubit = sl<ObscureTextCubit>();
   @override
   Widget build(BuildContext context) {
 return TextFormField(
@@ -36,7 +33,7 @@ return TextFormField(
   style: AppFonts.f16Redular717786().copyWith(fontSize: 12.sp),
   validator: widget.validator,
   keyboardType: widget.keyboardType,
-  obscureText: widget.isPass != null && cubit.obsecureText,
+  obscureText: widget.isPass != null &&widget. cubit!.obsecureText,
 
   decoration: InputDecoration(
     hintText: widget.hint,

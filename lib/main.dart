@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:task/core/utiles/bloc_observer.dart';
+import 'package:task/core/utiles/bloc/bloc_observer.dart';
 import 'package:task/core/utiles/setup_service_locator.dart';
 import 'package:task/core/utiles/shared_pref/prefs_Keys.dart';
 import 'package:task/core/utiles/shared_pref/shared_pref.dart';
