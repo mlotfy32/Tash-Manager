@@ -38,10 +38,10 @@ class _TasksAppState extends State<TasksApp> {
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
-              themeMode: mode == true ? ThemeMode.dark : ThemeMode.light,
+              themeMode: !mode == true ? ThemeMode.dark : ThemeMode.light,
               home: child,
             );
-          },
+          }, 
         );
       },
       child: token.isEmpty ? LoginView() : HomeView(),

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:task/core/utiles/services/api_services/failure.dart';
 
 class ApiService {
   late final Dio _dio;
@@ -8,8 +9,8 @@ class ApiService {
     _dio = Dio(
       BaseOptions(
         baseUrl: "https://jsonplaceholder.typicode.com/",
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 60),
         headers: {
           "Content-Type": "application/json",
         },
@@ -30,39 +31,57 @@ class ApiService {
 
   Dio get dio => _dio;
 
-  // =========================
-  // 🔹 GET
-  // =========================
-  Future<Response> get(
+  Future<dynamic> get(
     String path, {
     Map<String, dynamic>? query,
   }) async {
-    return await _dio.get(
-      path,
-      queryParameters: query,
-    );
+    try {
+      final response = await _dio.get(
+        path,
+        queryParameters: query,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      ServerFailure.fromDiorError(e);
+    }
   }
 
-  // =========================
-  // 🔹 POST
-  // =========================
-  Future<Response> post(
+  Future<dynamic> post(
     String path, {
     dynamic data,
   }) async {
-    return await _dio.post(
-      path,
-      data: data,
-    );
+    try {
+      final response = await _dio.post(
+        path,
+        data: data,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      ServerFailure.fromDiorError(e);
+    }
   }
 
-  // =========================
-  // 🔥 ADD (alias for POST - cleaner naming for tasks)
-  // =========================
-  Future<Response> add(
+  Future<dynamic> patch(
     String path, {
     dynamic data,
   }) async {
-    return await post(path, data: data);
+    try {
+      final response = await _dio.patch(
+        path,
+        data: data,
+      );
+      return response.data;
+    } on DioException catch (e) {
+      ServerFailure.fromDiorError(e);
+    }
+  }
+
+  Future<dynamic> delete(String path) async {
+    try {
+      final response = await _dio.delete(path);
+      return response.data;
+    } on DioException catch (e) {
+      ServerFailure.fromDiorError(e);
+    }
   }
 }
