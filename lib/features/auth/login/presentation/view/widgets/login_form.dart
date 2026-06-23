@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_utils/src/extensions/context_extensions.dart';
 import 'package:task/core/utiles/app_fonts.dart';
 import 'package:task/core/utiles/cubit/obscure_text_cubit.dart';
 import 'package:task/core/utiles/extentions.dart';
@@ -45,7 +44,7 @@ class LoginForm extends StatelessWidget {
           Text(
             isLogin ? "Welcome Back" : 'Create Account',
             style: AppFonts.f36ExtraBold191C1E().copyWith(
-              color: context.theme.primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
           ),
 

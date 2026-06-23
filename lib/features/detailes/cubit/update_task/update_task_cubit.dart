@@ -17,6 +17,7 @@ class UpdateTaskCubit extends Cubit<UpdateTaskState> {
     try {
       final api = ApiService.instance;
       await api.patch('todos/$id', data: {"completed": newStatus});
+      Helper.flutterToast(message: 'Task Updated');
       emit(UpdateTaskSuccess());
     } on DioException catch (e) {
       Helper.flutterToast(message: ServerFailure.fromDiorError(e).message);

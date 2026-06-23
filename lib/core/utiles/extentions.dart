@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 extension SizeExtentions on BuildContext {
   double getWidth({required BuildContext context}) =>
@@ -8,41 +7,6 @@ extension SizeExtentions on BuildContext {
       MediaQuery.sizeOf(context).height;
 }
 
-extension pray12hFormate on BuildContext {
-  pray12hformate({required String text}) {
-    if (text.contains(':')) {
-      int frist = int.parse(text.split(':').first) > 12
-          ? int.parse(text.split(':').first) - 12
-          : int.parse(text.split(':').first);
-      return '$frist:${text.split(':').last}';
-    } else {
-      return text;
-    }
-  }
-}
-extension NavigationExtension on BuildContext {
-  Future<T?> push<T>(Widget page) {
-    return Navigator.push<T>(
-      this,
-      MaterialPageRoute(builder: (_) => page),
-    );
-  }
-
-  void pop() {
-    Navigator.pop(this);
-  }
-
-  Future<T?> pushReplacement<T, TO>(Widget page) {
-    return Navigator.pushReplacement<T, TO>(
-      this,
-      MaterialPageRoute(builder: (_) => page),
-    );
-  }
-
-  void popUntilRoot() {
-    Navigator.popUntil(this, (route) => route.isFirst);
-  }
-}
 extension ExtensionWidget on Widget {
   Widget get center => Align(alignment: Alignment.center, child: this);
 
@@ -75,28 +39,6 @@ extension ExtensionWidget on Widget {
   Widget get toTopStart => Align(alignment: AlignmentDirectional.topStart, child: this);
   Widget get toTop => Align(alignment: Alignment.topCenter, child: this);
 }
-extension arabicDate on BuildContext {
-  getArabicDate({required String date}) {
-    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    const arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-    for (int i = 0; i < english.length; i++) {
-      date = date.replaceAll(english[i], arabic[i]);
-    }
-    return date;
-  }
-}
 
-extension Navigation on BuildContext {
-  void navigateTo({required BuildContext context, required Widget child}) {
-    Get.to(
-      () => child,
-      curve: Curves.easeInCirc,
-      transition: Transition.zoom,
-      duration: const Duration(microseconds: 500),
-    );
-  }
 
-  void navigateBack({required BuildContext context}) {
-    Get.back();
-  }
-}
+

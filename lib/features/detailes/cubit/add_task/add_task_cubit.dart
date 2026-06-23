@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 import 'package:task/core/utiles/helper.dart';
 import 'package:task/core/utiles/services/api_services/api_services.dart';
@@ -15,8 +14,8 @@ class AddTaskCubit extends Cubit<AddTaskState> {
 
   Future<void> addTask({required String userId, required String title}) async {
     if (formKey.currentState!.validate()) {
-      Get.back();
-      Helper.flutterToast(message: 'Loading');
+    
+      Helper.flutterToast(message: 'Loading...');
       try {
         final apiServices = ApiService.instance;
 

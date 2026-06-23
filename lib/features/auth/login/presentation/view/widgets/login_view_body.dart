@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:go_router/go_router.dart';
 import 'package:task/core/utiles/cubit/obscure_text_cubit.dart';
-import 'package:task/core/utiles/extentions.dart';
+import 'package:task/core/utiles/routes/router_named.dart';
 import 'package:task/core/utiles/setup_service_locator.dart';
 import 'package:task/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:task/features/auth/login/presentation/view/widgets/login_form.dart';
-import 'package:task/features/home/presentation/view/home_view.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -48,7 +46,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           bloc: logInCubit,
           listener: (context, state) {
             if (state is LoginSuccess) {
-              context.pushReplacement(HomeView());
+              context.go(RouterNamed.home);
             }
           },
           child: SingleChildScrollView(
@@ -58,7 +56,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: context.theme.cardColor,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(

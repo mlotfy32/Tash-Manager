@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:task/core/utiles/helper.dart';
 import 'package:task/core/utiles/services/api_services/api_services.dart';
 import 'package:task/core/utiles/services/api_services/failure.dart';
 import 'package:task/features/home/domain/entites/posts_entite.dart';
@@ -41,7 +40,9 @@ class GetTasksCubit extends Cubit<GetTasksState> {
         GetTasksFailure(errorMessage: ServerFailure.fromDiorError(e).message),
       );
     } catch (e) {
-      Helper.flutterToast(message: 'Something went wrong');
+       emit(
+        GetTasksFailure(errorMessage: 'Something went wrong'),
+      );
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:task/core/utiles/app_fonts.dart';
 import 'package:task/core/utiles/cubit/obscure_text_cubit.dart';
 
@@ -38,7 +37,7 @@ return TextFormField(
   decoration: InputDecoration(
     hintText: widget.hint,
     filled: true,
-    fillColor: context.theme.cardColor,
+    fillColor: Theme.of(context).cardColor,
 
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(16),

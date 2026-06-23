@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_utils/src/extensions/context_extensions.dart';
+import 'package:go_router/go_router.dart';
 import 'package:task/core/utiles/app_fonts.dart';
 import 'package:task/core/utiles/extentions.dart';
 import 'package:task/core/utiles/setup_service_locator.dart';
@@ -35,37 +35,40 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
     // addTask.close();
     super.dispose();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
+@override
+Widget build(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.only(
+      bottom: MediaQuery.of(context).viewInsets.bottom,
+    ),
+    child: Container(
       padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
-      margin: EdgeInsets.only(top: 150.h),
       decoration: BoxDecoration(
-        color: context.theme.scaffoldBackgroundColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: context.theme.primaryColor.withAlpha(80),
-            blurStyle: BlurStyle.outer,
-            blurRadius: 5,
+            color: Theme.of(context).primaryColor.withAlpha(60),
+            blurRadius: 10,
           ),
         ],
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(12.r),
-          topRight: Radius.circular(12.r),
+          topLeft: Radius.circular(16.r),
+          topRight: Radius.circular(16.r),
         ),
       ),
       child: Form(
         key: addTask.formKey,
         child: SingleChildScrollView(
           child: Column(
+            mainAxisSize: MainAxisSize.min, // ⭐ مهم جدًا
             children: [
               Text(
                 'Add Task',
                 style: AppFonts.f20ExtraBold0F172A().copyWith(
-                  color: context.theme.primaryColor,
+                  color: Theme.of(context).primaryColor,
                 ),
               ).withPadding(vertical: 16.h),
+
               CustomTextForm(
                 controller: userId,
                 hint: 'Enter Task Id',
@@ -73,18 +76,25 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
                 validator: (value) =>
                     AppValidator.validate(value: value, type: FieldType.normal),
               ).withPadding(bottom: 16.h),
+
               CustomTextForm(
                 controller: title,
                 hint: 'Enter Task Title',
                 validator: (value) =>
                     AppValidator.validate(value: value, type: FieldType.normal),
               ).withPadding(bottom: 16.h),
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                onPressed: () => addTask.addTask(
-                  userId: userId.text,
-                  title: title.text,
-                ),
+                onPressed: () {
+                  if (addTask.formKey.currentState!.validate()) {
+                    addTask.addTask(
+                      userId: userId.text,
+                      title: title.text,
+                    );
+                    context.pop();
+                  }
+                },
                 child: Text(
                   'Add Task',
                   style: AppFonts.f20ExtraBold0F172A().copyWith(
@@ -96,6 +106,7 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

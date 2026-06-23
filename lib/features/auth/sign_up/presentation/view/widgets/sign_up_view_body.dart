@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get/get_utils/get_utils.dart';
+import 'package:go_router/go_router.dart';
 import 'package:task/core/utiles/cubit/obscure_text_cubit.dart';
-import 'package:task/core/utiles/extentions.dart';
+import 'package:task/core/utiles/routes/router_named.dart';
 import 'package:task/core/utiles/setup_service_locator.dart';
-import 'package:task/features/auth/login/presentation/view/login_view.dart';
 import 'package:task/features/auth/login/presentation/view/widgets/login_form.dart';
 import 'package:task/features/auth/sign_up/presentation/cubit/sign_up_cubit.dart';
 
@@ -50,7 +48,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
           bloc: signUpCubit,
           listener: (context, state) {
             if (state is SignUpSuccess) {
-              context.pushReplacement(LoginView());
+              context.go(RouterNamed.login);
             }
           },
           child: SingleChildScrollView(
@@ -60,7 +58,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: context.theme.cardColor,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(

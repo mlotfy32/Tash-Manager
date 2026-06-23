@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_utils/src/extensions/context_extensions.dart';
 import 'package:task/core/utiles/app_fonts.dart';
 import 'package:task/core/utiles/extentions.dart';
 import 'package:task/core/utiles/setup_service_locator.dart';
@@ -39,7 +38,7 @@ class _PostContainerState extends State<PostContainer> {
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: context.theme.primaryColor.withAlpha(80),
+            color: Theme.of(context).primaryColor.withAlpha(80),
             blurStyle: BlurStyle.outer,
             blurRadius: 5,
           ),
@@ -59,7 +58,7 @@ class _PostContainerState extends State<PostContainer> {
                   : Colors.blueGrey,
             ),
             child: Text(
-              widget.postsModel.completed ? 'Completed' : 'In Progress',
+              widget.postsModel.completed ? 'Done' : 'In Progress',
               style: AppFonts.f14Redular414755().copyWith(
                 color: Colors.white,
                 fontSize: 12.sp,
@@ -69,7 +68,7 @@ class _PostContainerState extends State<PostContainer> {
           Text(
             'Title: ${widget.postsModel.title}',
             style: AppFonts.f14Redular414755().copyWith(
-              color: context.theme.primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
             maxLines: widget.isDetailes ? 3 : 1,
             overflow: TextOverflow.ellipsis,
@@ -93,16 +92,16 @@ class _PostContainerState extends State<PostContainer> {
                     return Row(
                       children: [
                         Text(
-                          'Is Completed',
+                          'Done',
                           style: AppFonts.f14Redular414755().copyWith(
-                            color: context.theme.primaryColor,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                         state is UpdateTaskLoading
                             ? SizedBox(
                                 width: 25.h,
                                 height: 25.h,
-                                child: CircularProgressIndicator(strokeWidth: 5,),
+                                child: CircularProgressIndicator(strokeWidth: 3,),
                               ).withPadding(horizontal: 10.w,vertical: 12.h)
                             : Checkbox(
                                 value: widget.postsModel.completed,
