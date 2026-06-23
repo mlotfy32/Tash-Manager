@@ -34,7 +34,7 @@ class _DetailesViewBodyState extends State<DetailesViewBody> {
         child: Column(
           children: [
             Text(
-              'Task Detailes',
+              'Tasks Detailes',
               style: AppFonts.f20ExtraBold0F172A().copyWith(
                 color: Theme.of(context).primaryColor,
               ),
